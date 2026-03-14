@@ -93,6 +93,7 @@ public class Main {
                 break;
             }
         }
+        con.close();
 
     }
 }
