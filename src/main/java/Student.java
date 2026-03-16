@@ -21,6 +21,13 @@ public class Student {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL) // BI-DIRECTIONAL MAPPING
 //    @JoinColumn(name = "Student_id")
     private List<Certificates> certificatesList = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "student_project",
+            joinColumns = {@JoinColumn(name = "s_id")},
+            inverseJoinColumns = {@JoinColumn(name = "p_id")}
+    )
+    private List<Project> projects = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -86,5 +93,13 @@ public class Student {
                 ", email='" + email + '\'' +
                 ", marks=" + marks +
                 '}';
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
     }
 }

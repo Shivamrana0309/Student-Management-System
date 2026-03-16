@@ -38,6 +38,16 @@ public class Main {
         Certificates c2 = new Certificates();
         c2.setName("C++");
 
+        Project p1 = new Project();
+        p1.setProjectname("Pure Health");
+        Project p2 = new Project();
+        p2.setProjectname("SmsHibernate");
+
+        s1.getProjects().add(p1);
+        s1.getProjects().add(p2);
+        p1.getStudents().add(s1);
+        p2.getStudents().add(s1);
+
         s1.getCertificatesList().add(c1);
         s1.getCertificatesList().add(c2);
 
@@ -48,6 +58,7 @@ public class Main {
         c2.setStudent(s1);
 
         StudentDao sd = new StudentDao();
+        System.out.println("Here");
         sd.saveStudent(s1);
     }
 }

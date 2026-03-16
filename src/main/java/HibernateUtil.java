@@ -7,10 +7,11 @@ public class HibernateUtil {
     public static SessionFactory getSf() {
         if(sf == null){
             sf = new Configuration()
+                    .configure()
                     .addAnnotatedClass(Student.class)
                     .addAnnotatedClass(Laptop.class)
                     .addAnnotatedClass(Certificates.class)
-                    .configure()
+                    .addAnnotatedClass(Project.class)
                     .buildSessionFactory();
         }
         return sf;
