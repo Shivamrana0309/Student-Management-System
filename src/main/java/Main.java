@@ -1,66 +1,53 @@
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        Student s1 = new Student();
-//        Scanner in = new Scanner(System.in);
-//        System.out.print("Enter name: ");
-//        s1.setName(in.next());
-//        System.out.println("Enter email: ");
-//        s1.setEmail(in.next());
-//        System.out.println("Enter marks: ");
-//        s1.setMarks(in.nextInt());
 
-//        Student s1 = new Student();
         Scanner in = new Scanner(System.in);
-//        System.out.print("Enter name: ");
-//        s1.setName(in.next());
-//        System.out.print("Enter email: ");
-//        s1.setEmail(in.next());
-//        System.out.print("Enter marks: ");
-//        s1.setMarks(in.nextInt());
 
-        Student s3 = new Student();
+        Student s1 = new Student();
+        System.out.print("Enter name: ");
+        s1.setName(in.nextLine());
+        System.out.print("Enter email: ");
+        s1.setEmail(in.nextLine());
+        System.out.print("Enter marks: ");
+        s1.setMarks(Integer.parseInt(in.nextLine()));
 
+        Address address = new Address();
+        System.out.print("Enter Address Line 1: ");
+        address.setAdd(in.nextLine());
+        System.out.print("Enter City: ");
+        address.setCity(in.nextLine());
+        System.out.print("Enter State: ");
+        address.setState(in.nextLine());
+        System.out.print("Enter Pin code: ");
+        address.setPincode(Integer.parseInt(in.nextLine()));
 
-        Student s2 = null;
+        Laptop laptop = new Laptop();
+        System.out.print("Enter brand: ");
+        laptop.setBrand(in.nextLine());
+        System.out.print("Enter model: ");
+        laptop.setModel(in.nextLine());
+        System.out.print("Enter ram: ");
+        laptop.setRam(in.nextLine());
+        System.out.print("Enter price: ");
+        laptop.setPrice(Integer.parseInt(in.nextLine()));
 
-        SessionFactory sf = new Configuration()
-                .addAnnotatedClass(Student.class)
-                .configure()
-                .buildSessionFactory();
+        Certificates c1 = new Certificates();
+        c1.setName("Java");
+        Certificates c2 = new Certificates();
+        c2.setName("C++");
 
-        Session session = sf.openSession();
+        s1.getCertificatesList().add(c1);
+        s1.getCertificatesList().add(c2);
 
-        Transaction transaction = session.beginTransaction();
+        s1.setAddress(address);
+        s1.setLaptop(laptop);
 
-//        session.persist(s1);
+        c1.setStudent(s1);
+        c2.setStudent(s1);
 
-//        System.out.print("Enter id to see records: ");
-//        s2 = session.find(Student.class,in.nextInt());
-
-//        System.out.print("Enter id to delete records: ");
-//        s2 = session.find(Student.class,in.nextInt());
-//        session.remove(s2);
-
-        System.out.print("Enter id to update records: ");
-        int id = in.nextInt();
-        s3.setId(id);
-        s3 = session.find(Student.class,id);
-        System.out.print("Enter marks to update: ");
-        s3.setMarks(in.nextInt());
-        session.merge(s3);
-
-        transaction.commit();
-//        System.out.println(s2);
-
-        session.close();
-        sf.close();
-        in.close();
+        StudentDao sd = new StudentDao();
+        sd.saveStudent(s1);
     }
 }
